@@ -239,4 +239,82 @@
       <article class="podcast" aria-labelledby="pod1">
         <h3 id="pod1">🎙️ Odcinek 1: Start Kostkowego Radia</h3>
         <p>Posłuchaj jak powstało Kostkowe Radio.</p>
-        <a href="https://kostkoweradio.github.io/podcasty/Koniec%20Zmiany%20Czasu%20Ju%C5%BC%20Od%202026.mp3" target="_blank" rel="noopener noreferrer">
+        <a href="https://kostkoweradio.github.io/podcasty/Koniec%20Zmiany%20Czasu%20Ju%C5%BC%20Od%202026.mp3" target="_blank" rel="noopener noreferrer">▶️ Przejdź do odtwarzacza</a>
+      </article>
+
+      <!-- Możesz dodać kolejne elementy podcastów tutaj -->
+    </section>
+  </main>
+
+  <footer>
+    © Kostkowe Radio — wszystkie prawa zastrzeżone • <a href="https://kostkoweradio.github.io/" target="_blank" rel="noopener noreferrer" style="color:var(--muted);text-decoration:underline">Strona główna</a>
+  </footer>
+
+  <script>
+    // Countdown target: 28.06.2026 09:00 CEST -> UTC 07:00
+    const targetDate = new Date("2026-06-28T07:00:00Z").getTime();
+
+    function updateCountdown(){
+      const now = Date.now();
+      const distance = targetDate - now;
+      if(distance <= 0){
+        document.querySelector(".countdown").innerHTML = "<strong>WYGASZANIE!</strong>";
+        return;
+      }
+      const days = Math.floor(distance / (1000*60*60*24));
+      const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+      const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+      const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+      document.getElementById("days").textContent = String(days).padStart(2,'0');
+      document.getElementById("hours").textContent = String(hours).padStart(2,'0');
+      document.getElementById("minutes").textContent = String(minutes).padStart(2,'0');
+      document.getElementById("seconds").textContent = String(seconds).padStart(2,'0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Theme handling: respects system preference, saves to localStorage
+    const root = document.documentElement;
+    const stored = localStorage.getItem('kr_theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    function applyTheme(theme){
+      if(theme === 'light'){
+        root.setAttribute('data-theme','light');
+        document.getElementById('themeToggle').setAttribute('aria-pressed','false');
+      } else {
+        root.setAttribute('data-theme','dark');
+        document.getElementById('themeToggle').setAttribute('aria-pressed','true');
+      }
+    }
+
+    // Initialize theme
+    if(stored){
+      applyTheme(stored);
+    } else {
+      applyTheme(prefersDark ? 'dark' : 'light');
+    }
+
+    // Toggle button
+    document.getElementById('themeToggle').addEventListener('click', function(){
+      const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      localStorage.setItem('kr_theme', next);
+      // small animation for dot
+      const dot = this.querySelector('.dot');
+      dot.animate([{transform:'scale(0.9)'},{transform:'scale(1.05)'},{transform:'scale(1)'}],{duration:260,easing:'ease-out'});
+    });
+
+    // Accessibility: allow toggle with keyboard (Enter/Space)
+    document.getElementById('themeToggle').addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        this.click();
+      }
+    });
+  </script>
+</body>
+</html>
