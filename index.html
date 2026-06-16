@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kostkowe Radio — Nowy wygląd</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://kostkoweradio.github.io/strona-glowna/icon.png" type="image/png" />
+
+  <style>
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: linear-gradient(90deg,#ff6b6b,#ff4081);
+      --accent-solid: #ff4081;
+      --text: #e6eef8;
+      --glass: rgba(255,255,255,0.04);
+      --shadow: 0 8px 30px rgba(2,6,23,0.6);
+      --radius: 14px;
+      --glass-border: rgba(255,255,255,0.04);
+      --glass-strong: rgba(255,255,255,0.06);
+    }
+
+    /* Light theme overrides */
+    :root[data-theme="light"]{
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --muted: #556070;
+      --accent: linear-gradient(90deg,#ff6b6b,#e91e63);
+      --accent-solid: #e91e63;
+      --text: #0b1220;
+      --glass: rgba(11,18,32,0.03);
+      --shadow: 0 10px 30px rgba(11,18,32,0.06);
+      --glass-border: rgba(11,18,32,0.04);
+      --glass-strong: rgba(11,18,32,0.06);
+    }
+
+    /* Base reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+    a{color:inherit}
+
+    /* Top navigation */
+    .main-menu{
+      position:sticky;top:18px;z-index:60;
+      margin:0 auto;max-width:1200px;padding:12px;border-radius:16px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      backdrop-filter: blur(8px) saturate(120%);
+      box-shadow:var(--shadow);
+      border:1px solid var(--glass-border);
+      margin-top:18px;
+    }
+
+    .menu-left{display:flex;align-items:center;gap:12px}
+    .menu-logo{width:48px;height:48px;border-radius:10px;object-fit:cover;border:1px solid var(--glass-strong);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)}
+    .menu-title{font-weight:800;font-size:1.15rem;letter-spacing:0.2px}
+    .menu-right{display:flex;gap:18px;align-items:center}
+    .menu-link{font-weight:600;color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;transition:all .18s ease}
+    .menu-link:hover{color:var(--text);background:var(--glass);transform:translateY(-2px)}
+
+    /* Theme toggle */
+    .controls{display:flex;gap:12px;align-items:center}
+    .toggle{
+      display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-border);cursor:pointer;
+    }
+    .toggle .dot{width:18px;height:18px;border-radius:50%;background:var(--accent-solid);box-shadow:0 6px 18px rgba(255,64,129,0.18)}
+
+    /* Hero */
+    .hero{
+      max-width:1200px;margin:28px auto 18px;display:grid;grid-template-columns:1fr 420px;gap:22px;align-items:center;padding:28px;border-radius:18px;
+      background-image: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.06)), url('https://kostkoweradio.github.io/strona-glowna/0yg11h.jpg');
+      background-size:cover;background-position:center;
+      border:1px solid var(--glass-border);box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero-card{
+      padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;
+      backdrop-filter: blur(6px);
+    }
+
+    .hero h1{font-size:2.2rem;margin-bottom:6px;line-height:1.02}
+    .hero h2{font-size:1.05rem;color:var(--muted);font-weight:600;margin-bottom:12px}
+    .hero p{color:var(--muted);font-size:0.98rem;margin-bottom:18px}
+
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:700;
+      background:var(--accent);color:white;box-shadow:0 8px 24px rgba(0,0,0,0.18);transition:transform .15s ease, box-shadow .15s ease;
+    }
+    .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--glass-border;font-weight:700);box-shadow:none}
+    .btn:active{transform:translateY(1px)}
+
+    /* Right column: live player card */
+    .live-card{
+      padding:20px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid var(--glass-border);display:flex;flex-direction:column;gap:12px;align-items:stretch;
+    }
+    .live-title{font-weight:800;font-size:1rem}
+    .live-sub{color:var(--muted);font-size:0.9rem}
+    .live-player{display:flex;gap:12px;align-items:center;justify-content:space-between}
+    .live-play{padding:12px 16px;border-radius:12px;background:var(--accent);color:white;font-weight:800;border:none;cursor:pointer}
+    .live-meta{font-size:0.9rem;color:var(--muted)}
+
+    /* Info section */
+    .opis{
+      max-width:1200px;margin:18px auto;padding:22px;border-radius:14px;background:var(--card);border:1px solid var(--glass-border);box-shadow:var(--shadow);
+    }
+    .opis h2{font-size:1.25rem;margin-bottom:8px}
+    .opis p{color:var(--muted);line-height:1.6}
+
+    /* Podcasty grid */
+    .podcasty{
+      max-width:1200px;margin:26px auto;padding:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;
+    }
+    .podcast{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:16px;border-radius:12px;border:1px solid var(--glass-border);
+      box-shadow:0 8px 20px rgba(2,6,23,0.25);
+    }
+    .podcast h3{font-size:1rem;margin-bottom:6px}
+    .podcast p{color:var(--muted);font-size:0.95rem;margin-bottom:10px}
+    .podcast a{display:inline-block;padding:8px 12px;border-radius:10px;background:var(--accent);color:white;text-decoration:none;font-weight:700}
+
+    /* Warning bar / countdown */
+    .warning-bar{
+      max-width:1200px;margin:18px auto;padding:14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:12px;
+      background:linear-gradient(90deg,#ff6b6b,#ff4081);color:white;font-weight:700;border:1px solid rgba(255,255,255,0.06);
+    }
+    .warning-text{font-size:0.95rem}
+    .countdown{display:flex;gap:10px;align-items:center;font-weight:800}
+    .countdown span{min-width:44px;text-align:center;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.12)}
+
+    /* Footer */
+    footer{max-width:1200px;margin:28px auto;padding:18px;border-radius:12px;background:transparent;color:var(--muted);text-align:center;font-size:0.95rem}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr; padding:18px}
+      .main-menu{flex-direction:column;gap:10px;padding:12px}
+      .menu-right{flex-wrap:wrap;justify-content:center}
+    }
+
+    @media (max-width:520px){
+      .menu-title{font-size:1rem}
+      .hero h1{font-size:1.6rem}
+      .hero h2{font-size:0.95rem}
+      .warning-bar{flex-direction:column;gap:8px;text-align:center}
+      .countdown span{min-width:36px;padding:6px 8px}
+    }
+
+    /* Smooth transitions for theme changes */
+    *{transition:background-color .25s ease,color .25s ease,box-shadow .25s ease,transform .12s ease}
+  </style>
+</head>
+<body>
+
+  <header style="padding:0 16px;">
+    <div class="main-menu" role="navigation" aria-label="Główne menu">
+      <div class="menu-left">
+        <img src="https://kostkoweradio.github.io/strona-glowna/icon.png" alt="Logo Kostkowe Radio" class="menu-logo" />
+        <div>
+          <div class="menu-title">Kostkowe Radio</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">Internetowe radio od 2023</div>
+        </div>
+      </div>
+
+      <div class="menu-right">
+        <nav aria-label="Nawigacja">
+          <a class="menu-link" href="https://kostkoweradio.github.io/wiadomosci/" target="_blank" rel="noopener noreferrer">Wiadomości</a>
+          <a class="menu-link" href="https://kostkoweradio.github.io/ramowka/" target="_blank" rel="noopener noreferrer">Ramówka</a>
+          <a class="menu-link" href="https://kostkoweradio.github.io/informacje/" target="_blank" rel="noopener noreferrer">Informacje</a>
+        </nav>
+
+        <div class="controls" aria-hidden="false">
+          <button id="themeToggle" class="toggle" aria-pressed="false" title="Przełącz motyw">
+            <span class="dot" aria-hidden="true"></span>
+            <span style="font-weight:700;font-size:13px;color:var(--muted)">Motyw</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="warning-bar" role="status" aria-live="polite">
+      <div class="warning-text">
+        W dniu <strong>28 czerwca 2026</strong> Kostkowe Radio zostanie ulepszone — w tym czasie radio będzie niedostępne.
+      </div>
+      <div class="countdown" aria-hidden="false">
+        <div><span id="days">0</span> d</div>
+        <div><span id="hours">0</span> h</div>
+        <div><span id="minutes">0</span> m</div>
+        <div><span id="seconds">0</span> s</div>
+      </div>
+    </div>
+
+    <section class="hero" aria-label="Hero">
+      <div class="hero-card">
+        <h1>Zapraszamy na Kostkowe Radio</h1>
+        <h2>Słuchasz Kostkowego Radia — muzyka, audycje, społeczność</h2>
+        <p>Nadajemy od 2023. Znajdziesz u nas podcasty, ramówkę i transmisję na żywo.</p>
+
+        <div class="hero-actions">
+          <button class="btn" onclick="window.open('https://kostkoweradio.github.io/radio', '_blank')">Radio na żywo ▶️</button>
+          <a class="btn secondary" href="https://kostkoweradio.github.io/podcasty/" target="_blank" rel="noopener noreferrer">Podcasty</a>
+        </div>
+      </div>
+
+      <aside class="live-card" aria-label="Panel na żywo">
+        <div>
+          <div class="live-title">Radio na żywo</div>
+          <div class="live-sub">Aktualnie: brak transmisji (prace modernizacyjne)</div>
+        </div>
+
+        <div class="live-player">
+          <div class="live-meta">Odtwarzacz online</div>
+          <div style="flex:1"></div>
+          <button class="live-play" onclick="window.open('https://kostkoweradio.github.io/radio', '_blank')">Otwórz ▶</button>
+        </div>
+
+        <div style="font-size:12px;color:var(--muted);margin-top:6px">Możesz też odsłuchać najnowsze odcinki w sekcji podcastów.</div>
+      </aside>
+    </section>
+
+    <section class="opis" aria-label="Opis">
+      <h2>Co to jest Kostkowe Radio?</h2>
+      <p>
+        Kostkowe Radio to internetowe radio stworzone z pasji do muzyki i kreatywności. Nadajemy muzykę 24/7, prowadzimy audycje i tworzymy miejsce dla fanów kostek, dźwięków i dobrej zabawy.
+      </p>
+    </section>
+
+    <section class="podcasty" aria-label="Podcasty">
+      <article class="podcast" aria-labelledby="pod1">
+        <h3 id="pod1">🎙️ Odcinek 1: Start Kostkowego Radia</h3>
+        <p>Posłuchaj jak powstało Kostkowe Radio.</p>
+        <a href="https://kostkoweradio.github.io/podcasty/Koniec%20Zmiany%20Czasu%20Ju%C5%BC%20Od%202026.mp3" target="_blank" rel="noopener noreferrer">
