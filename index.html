@@ -6,167 +6,162 @@
   <title>Kostkowe Radio — Nowy wygląd</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
 
   <!-- Favicon -->
   <link rel="icon" href="https://kostkoweradio.github.io/strona-glowna/icon.png" type="image/png" />
 
   <style>
     :root{
-      --bg: #0f1724;
-      --card: #0b1220;
-      --muted: #9aa4b2;
-      --accent: linear-gradient(90deg,#ff6b6b,#ff4081);
-      --accent-solid: #ff4081;
-      --text: #e6eef8;
-      --glass: rgba(255,255,255,0.04);
-      --shadow: 0 8px 30px rgba(2,6,23,0.6);
-      --radius: 14px;
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent-1:#ff6b6b;
+      --accent-2:#ff4081;
+      --accent-grad: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      --text:#e6eef8;
+      --glass: rgba(255,255,255,0.03);
       --glass-border: rgba(255,255,255,0.04);
-      --glass-strong: rgba(255,255,255,0.06);
+      --radius:14px;
+      --shadow: 0 10px 30px rgba(2,6,23,0.6);
     }
 
-    /* Light theme overrides */
     :root[data-theme="light"]{
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --muted: #556070;
-      --accent: linear-gradient(90deg,#ff6b6b,#e91e63);
-      --accent-solid: #e91e63;
-      --text: #0b1220;
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --muted:#556070;
+      --accent-1:#ff6b6b;
+      --accent-2:#e91e63;
+      --text:#0b1220;
       --glass: rgba(11,18,32,0.03);
-      --shadow: 0 10px 30px rgba(11,18,32,0.06);
       --glass-border: rgba(11,18,32,0.04);
-      --glass-strong: rgba(11,18,32,0.06);
+      --shadow: 0 10px 30px rgba(11,18,32,0.06);
     }
 
-    /* Base reset */
+    /* Reset */
     *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
-    a{color:inherit}
+    html,body{height:100%;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+
+    /* Container */
+    .wrap{max-width:1200px;margin:20px auto;padding:0 16px}
 
     /* Top navigation */
     .main-menu{
-      position:sticky;top:18px;z-index:60;
-      margin:0 auto;max-width:1200px;padding:12px;border-radius:16px;
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border-radius:14px;
       background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      backdrop-filter: blur(8px) saturate(120%);
+      backdrop-filter: blur(4px) saturate(120%);
       box-shadow:var(--shadow);
       border:1px solid var(--glass-border);
-      margin-top:18px;
     }
-
     .menu-left{display:flex;align-items:center;gap:12px}
-    .menu-logo{width:48px;height:48px;border-radius:10px;object-fit:cover;border:1px solid var(--glass-strong);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)}
-    .menu-title{font-weight:800;font-size:1.15rem;letter-spacing:0.2px}
-    .menu-right{display:flex;gap:18px;align-items:center}
-    .menu-link{font-weight:600;color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;transition:all .18s ease}
+    .menu-logo{width:52px;height:52px;border-radius:10px;object-fit:cover;border:1px solid var(--glass-border)}
+    .menu-title{font-family:"Montserrat",sans-serif;font-weight:700;font-size:1.15rem}
+    .menu-sub{font-size:12px;color:var(--muted);margin-top:2px}
+
+    .menu-right{display:flex;align-items:center;gap:14px}
+    .menu-link{font-weight:600;color:var(--muted);padding:8px 12px;border-radius:10px;transition:all .18s ease}
     .menu-link:hover{color:var(--text);background:var(--glass);transform:translateY(-2px)}
 
     /* Theme toggle */
     .controls{display:flex;gap:12px;align-items:center}
-    .toggle{
-      display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-border);cursor:pointer;
-    }
-    .toggle .dot{width:18px;height:18px;border-radius:50%;background:var(--accent-solid);box-shadow:0 6px 18px rgba(255,64,129,0.18)}
+    .toggle{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-border);cursor:pointer}
+    .toggle .dot{width:18px;height:18px;border-radius:50%;background:var(--accent-2);box-shadow:0 6px 18px rgba(255,64,129,0.18)}
 
     /* Hero */
     .hero{
-      max-width:1200px;margin:28px auto 18px;display:grid;grid-template-columns:1fr 420px;gap:22px;align-items:center;padding:28px;border-radius:18px;
-      background-image: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.06)), url('https://kostkoweradio.github.io/strona-glowna/0yg11h.jpg');
+      margin-top:20px;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1fr 380px;gap:20px;
+      background-image: url('https://kostkoweradio.github.io/strona-glowna/0yg11h.jpg');
       background-size:cover;background-position:center;
       border:1px solid var(--glass-border);box-shadow:var(--shadow);
-      overflow:hidden;
+      position:relative;
+    }
+
+    /* Subtle decorative overlay (no heavy blur) */
+    .hero::before{
+      content:"";position:absolute;inset:0;
+      background: linear-gradient(180deg, rgba(2,6,23,0.35), rgba(2,6,23,0.12));
+      pointer-events:none;
+    }
+
+    /* Decorative SVG corner */
+    .hero .decor{
+      position:absolute;right:-40px;top:-40px;opacity:0.12;filter:blur(0.6px);transform:rotate(18deg);
     }
 
     .hero-card{
-      padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;
-      backdrop-filter: blur(6px);
+      position:relative;padding:36px 32px;z-index:2;
+      display:flex;flex-direction:column;gap:12px;align-items:flex-start;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-right:1px solid rgba(255,255,255,0.02);
     }
+    .hero h1{font-family:"Montserrat",sans-serif;font-weight:700;font-size:2rem;line-height:1}
+    .hero h2{font-weight:600;color:var(--muted);font-size:1rem}
+    .hero p{color:var(--muted);font-size:0.98rem}
 
-    .hero h1{font-size:2.2rem;margin-bottom:6px;line-height:1.02}
-    .hero h2{font-size:1.05rem;color:var(--muted);font-weight:600;margin-bottom:12px}
-    .hero p{color:var(--muted);font-size:0.98rem;margin-bottom:18px}
-
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-actions{display:flex;gap:12px;margin-top:8px}
     .btn{
       display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:700;
-      background:var(--accent);color:white;box-shadow:0 8px 24px rgba(0,0,0,0.18);transition:transform .15s ease, box-shadow .15s ease;
+      background:var(--accent-grad);color:white;box-shadow:0 10px 30px rgba(0,0,0,0.25);transition:transform .12s ease;
     }
-    .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--glass-border;font-weight:700);box-shadow:none}
-    .btn:active{transform:translateY(1px)}
+    .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--glass-border);box-shadow:none}
 
-    /* Right column: live player card */
+    /* Right column: live card */
     .live-card{
-      padding:20px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid var(--glass-border);display:flex;flex-direction:column;gap:12px;align-items:stretch;
+      margin:20px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid var(--glass-border);display:flex;flex-direction:column;gap:10px;align-items:stretch;z-index:2;
     }
-    .live-title{font-weight:800;font-size:1rem}
-    .live-sub{color:var(--muted);font-size:0.9rem}
+    .live-title{font-weight:700;font-family:"Montserrat",sans-serif}
+    .live-sub{color:var(--muted);font-size:0.95rem}
     .live-player{display:flex;gap:12px;align-items:center;justify-content:space-between}
-    .live-play{padding:12px 16px;border-radius:12px;background:var(--accent);color:white;font-weight:800;border:none;cursor:pointer}
-    .live-meta{font-size:0.9rem;color:var(--muted)}
+    .live-play{padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:white;border:none;font-weight:800;cursor:pointer}
 
     /* Info section */
-    .opis{
-      max-width:1200px;margin:18px auto;padding:22px;border-radius:14px;background:var(--card);border:1px solid var(--glass-border);box-shadow:var(--shadow);
-    }
-    .opis h2{font-size:1.25rem;margin-bottom:8px}
+    .opis{margin-top:18px;padding:20px;border-radius:12px;background:var(--card);border:1px solid var(--glass-border);box-shadow:var(--shadow)}
+    .opis h2{font-family:"Montserrat",sans-serif;font-weight:700;margin-bottom:8px}
     .opis p{color:var(--muted);line-height:1.6}
 
     /* Podcasty grid */
-    .podcasty{
-      max-width:1200px;margin:26px auto;padding:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;
-    }
-    .podcast{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:16px;border-radius:12px;border:1px solid var(--glass-border);
-      box-shadow:0 8px 20px rgba(2,6,23,0.25);
-    }
-    .podcast h3{font-size:1rem;margin-bottom:6px}
-    .podcast p{color:var(--muted);font-size:0.95rem;margin-bottom:10px}
-    .podcast a{display:inline-block;padding:8px 12px;border-radius:10px;background:var(--accent);color:white;text-decoration:none;font-weight:700}
+    .podcasty{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:18px}
+    .podcast{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid var(--glass-border)}
+    .podcast h3{font-family:"Montserrat",sans-serif;font-weight:700;margin-bottom:6px}
+    .podcast p{color:var(--muted);margin-bottom:10px}
+    .podcast a{display:inline-block;padding:8px 12px;border-radius:10px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:white;font-weight:700}
 
     /* Warning bar / countdown */
-    .warning-bar{
-      max-width:1200px;margin:18px auto;padding:14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:12px;
-      background:linear-gradient(90deg,#ff6b6b,#ff4081);color:white;font-weight:700;border:1px solid rgba(255,255,255,0.06);
-    }
+    .warning-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px;border-radius:12px;background:linear-gradient(90deg,#ff6b6b,#ff4081);color:white;font-weight:700;margin-top:18px;border:1px solid rgba(255,255,255,0.06)}
     .warning-text{font-size:0.95rem}
-    .countdown{display:flex;gap:10px;align-items:center;font-weight:800}
+    .countdown{display:flex;gap:8px;align-items:center;font-weight:800}
     .countdown span{min-width:44px;text-align:center;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.12)}
 
-    /* Footer */
-    footer{max-width:1200px;margin:28px auto;padding:18px;border-radius:12px;background:transparent;color:var(--muted);text-align:center;font-size:0.95rem}
+    footer{margin:28px 0;text-align:center;color:var(--muted);font-size:0.95rem}
 
     /* Responsive */
     @media (max-width:980px){
-      .hero{grid-template-columns:1fr; padding:18px}
-      .main-menu{flex-direction:column;gap:10px;padding:12px}
-      .menu-right{flex-wrap:wrap;justify-content:center}
+      .hero{grid-template-columns:1fr;min-height:auto}
+      .live-card{order:2}
+      .hero-card{order:1}
+      .main-menu{flex-direction:column;gap:10px}
     }
-
     @media (max-width:520px){
       .menu-title{font-size:1rem}
-      .hero h1{font-size:1.6rem}
-      .hero h2{font-size:0.95rem}
-      .warning-bar{flex-direction:column;gap:8px;text-align:center}
+      .hero h1{font-size:1.4rem}
       .countdown span{min-width:36px;padding:6px 8px}
     }
 
-    /* Smooth transitions for theme changes */
-    *{transition:background-color .25s ease,color .25s ease,box-shadow .25s ease,transform .12s ease}
+    /* Smooth transitions */
+    *{transition:background-color .22s ease,color .22s ease,box-shadow .18s ease,transform .12s ease}
   </style>
 </head>
 <body>
 
-  <header style="padding:0 16px;">
-    <div class="main-menu" role="navigation" aria-label="Główne menu">
+  <div class="wrap">
+    <header class="main-menu" role="navigation" aria-label="Główne menu">
       <div class="menu-left">
         <img src="https://kostkoweradio.github.io/strona-glowna/icon.png" alt="Logo Kostkowe Radio" class="menu-logo" />
         <div>
           <div class="menu-title">Kostkowe Radio</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px">Internetowe radio od 2023</div>
+          <div class="menu-sub">Internetowe radio od 2023</div>
         </div>
       </div>
 
@@ -177,17 +172,15 @@
           <a class="menu-link" href="https://kostkoweradio.github.io/informacje/" target="_blank" rel="noopener noreferrer">Informacje</a>
         </nav>
 
-        <div class="controls" aria-hidden="false">
+        <div class="controls">
           <button id="themeToggle" class="toggle" aria-pressed="false" title="Przełącz motyw">
             <span class="dot" aria-hidden="true"></span>
             <span style="font-weight:700;font-size:13px;color:var(--muted)">Motyw</span>
           </button>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
     <div class="warning-bar" role="status" aria-live="polite">
       <div class="warning-text">
         W dniu <strong>28 czerwca 2026</strong> Kostkowe Radio zostanie ulepszone — w tym czasie radio będzie niedostępne.
@@ -201,7 +194,18 @@
     </div>
 
     <section class="hero" aria-label="Hero">
-      <div class="hero-card">
+      <!-- Decorative SVG (subtle) -->
+      <svg class="decor" width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#ff6b6b" stop-opacity="0.9"/>
+            <stop offset="1" stop-color="#ff4081" stop-opacity="0.9"/>
+          </linearGradient>
+        </defs>
+        <rect x="10" y="10" width="200" height="200" rx="28" fill="url(#g1)" opacity="0.08"/>
+      </svg>
+
+      <div class="hero-card" role="region" aria-label="Wprowadzenie">
         <h1>Zapraszamy na Kostkowe Radio</h1>
         <h2>Słuchasz Kostkowego Radia — muzyka, audycje, społeczność</h2>
         <p>Nadajemy od 2023. Znajdziesz u nas podcasty, ramówkę i transmisję na żywo.</p>
@@ -212,7 +216,7 @@
         </div>
       </div>
 
-      <aside class="live-card" aria-label="Panel na żywo">
+      <aside class="live-card" role="complementary" aria-label="Panel na żywo">
         <div>
           <div class="live-title">Radio na żywo</div>
           <div class="live-sub">Aktualnie: brak transmisji (prace modernizacyjne)</div>
@@ -241,14 +245,12 @@
         <p>Posłuchaj jak powstało Kostkowe Radio.</p>
         <a href="https://kostkoweradio.github.io/podcasty/Koniec%20Zmiany%20Czasu%20Ju%C5%BC%20Od%202026.mp3" target="_blank" rel="noopener noreferrer">▶️ Przejdź do odtwarzacza</a>
       </article>
-
-      <!-- Możesz dodać kolejne elementy podcastów tutaj -->
     </section>
-  </main>
 
-  <footer>
-    © Kostkowe Radio — wszystkie prawa zastrzeżone • <a href="https://kostkoweradio.github.io/" target="_blank" rel="noopener noreferrer" style="color:var(--muted);text-decoration:underline">Strona główna</a>
-  </footer>
+    <footer>
+      © Kostkowe Radio — wszystkie prawa zastrzeżone • <a href="https://kostkoweradio.github.io/" target="_blank" rel="noopener noreferrer" style="color:var(--muted);text-decoration:underline">Strona główna</a>
+    </footer>
+  </div>
 
   <script>
     // Countdown target: 28.06.2026 09:00 CEST -> UTC 07:00
@@ -290,25 +292,21 @@
       }
     }
 
-    // Initialize theme
     if(stored){
       applyTheme(stored);
     } else {
       applyTheme(prefersDark ? 'dark' : 'light');
     }
 
-    // Toggle button
     document.getElementById('themeToggle').addEventListener('click', function(){
       const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
       const next = current === 'light' ? 'dark' : 'light';
       applyTheme(next);
       localStorage.setItem('kr_theme', next);
-      // small animation for dot
       const dot = this.querySelector('.dot');
       dot.animate([{transform:'scale(0.9)'},{transform:'scale(1.05)'},{transform:'scale(1)'}],{duration:260,easing:'ease-out'});
     });
 
-    // Accessibility: allow toggle with keyboard (Enter/Space)
     document.getElementById('themeToggle').addEventListener('keydown', function(e){
       if(e.key === 'Enter' || e.key === ' '){
         e.preventDefault();
